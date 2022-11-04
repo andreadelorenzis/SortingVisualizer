@@ -16,17 +16,13 @@ slider.addEventListener('input', changeArray);
 slider.value = 50;
 
 const selectAlgo = document.getElementById('algorithm');
-algorithm = selectAlgo.value;
-console.log(algorithm);
 selectAlgo.addEventListener('change', () => chooseAlgorithm(selectAlgo.value));
 
 const selectSpeed = document.getElementById('speed');
-speed = parseInt(selectSpeed.value);
-console.log(speed);
 selectSpeed.addEventListener('change', () => chooseSpeed(parseInt(selectSpeed.value)));
 
 const sortBtn = document.querySelector('.sort-btn');
-sortBtn.addEventListener('click', () => { sorting = true; runAlgorithm(algorithm, speed); toggleStopBtn(); });
+sortBtn.addEventListener('click', () => { runAlgorithm(selectAlgo.value, selectSpeed.value); });
 
 const stopBtn = document.querySelector('.stop-btn');
 stopBtn.addEventListener('click', () => { stopAlgorithm(); })
@@ -63,8 +59,8 @@ function chooseAlgorithm(algo) {
     algorithm = algo;
 }
 
-function chooseSpeed(spee) {
-    speed = spee;
+function chooseSpeed(s) {
+    speed = s;
     // test
     if (speed == 500) {
         stop = true;
@@ -79,10 +75,18 @@ function getRandomNum(min, max) {
 }
 
 async function runAlgorithm(algorithm, speed) {
-
-    if (!speed) {
-        alert('Select speed');
+    if (speed === 'speed') {
+        alert('Please, select speed');
+        return;
     }
+
+    if (algorithm === 'algorithm') {
+        alert('Please, select algorithm');
+        return;
+    }
+
+    sorting = true;
+    toggleStopBtn();
 
     switch (algorithm) {
         case 'Bubble Sort':
